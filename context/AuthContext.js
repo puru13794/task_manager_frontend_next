@@ -8,17 +8,15 @@ import {
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-
-  
   const login = (token) => {
-    setAuthToken(token, 'Auth_Token')
+    setAuthToken(token, "auth_token");
   };
 
   const logout = () => {
-    removeAuthToken('Auth_Token')
+    removeAuthToken("auth_token");
   };
 
-  const isAuthenticated = () => !!getAuthToken('Auth_Token')
+  const isAuthenticated = () => !!getAuthToken("auth_token");
 
   return (
     <AuthContext.Provider value={{ login, logout, isAuthenticated }}>

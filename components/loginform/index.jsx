@@ -1,8 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 import styles from "./styles.module.scss";
+import axios from "axios";
+import { useRouter } from "next/router";
+import { setAuthToken } from "../../utils/authUtils";
 
 const loginform = ({ login = true }) => {
   //   const { login } = props;
+  const router = useRouter();
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -35,7 +39,40 @@ const loginform = ({ login = true }) => {
       ispasswordValid: ispasswordValid,
     });
     if (data.ispasswordValid && data.isValidEmail) {
-      console.log("siginin in");
+      const userData = {
+        email: data.email,
+        password: data.password,
+      };
+      if (!login) {
+        axios
+          .post(`http://localhost:3000/users`, {
+            user: { ...userData },
+          })
+          .then((response) => {
+            // console.log("response", response);
+            if (response.status === 200 && response.data?.code == 200) {
+              router.push("/login");
+              //TODO:  flash a toater with response message
+            } else {
+              console.log("sign up failed");
+            }
+          });
+      } else {
+        axios
+          .post(`http://localhost:3000/users/sign_in`, {
+            user: { ...userData },
+          })
+          .then((response) => {
+            console.log("response", response);
+            if (response.status === 200 && response.data?.data.code == 200) {
+              // console.log('token', response.headers.authorization)
+              setAuthToken(response.headers.authorization, 'auth_token')
+              router.push("/dashboard");
+            } else {
+              console.log("sign in failed");
+            }
+          });
+      }
     } else {
       console.log("toaster");
     }

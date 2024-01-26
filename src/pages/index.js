@@ -1,7 +1,24 @@
 import Head from "next/head";
 import Login from "../../components/loginform";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
+import { useAuth } from "../../context/AuthContext";
 
 export default function Home() {
+  const router = useRouter();
+  const { isAuthenticated } = useAuth();
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      if (isAuthenticated()) {
+        router.push("/dashboard");
+      } else {
+        router.push("/login");
+      }
+    };
+
+    checkAuth();
+  }, [isAuthenticated, router]);
   return (
     <>
       <Head>
