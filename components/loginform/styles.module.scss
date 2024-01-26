@@ -9,6 +9,16 @@
   border: 1px solid #ccc;
   padding: 20px;
   width: 300px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+
+  .login {
+    margin: auto;
+  }
 
   button {
     width: 100%;
@@ -17,10 +27,17 @@
     color: white;
     border: none;
     cursor: pointer;
+    transition: 0.3s ease-in-out;
+    border-radius: 5px;
 
     &:disabled {
       background-color: #bdc3c7;
       cursor: not-allowed;
+    }
+
+    &:hover {
+      background-color: #ffd000;
+      color: #000;
     }
   }
 }
@@ -37,11 +54,18 @@
     width: 100%;
     padding: 8px;
     box-sizing: border-box;
-    border: 1px solid #ccc;
+    border: 1px solid #ebebeb;
+    border-radius: 5px;
+    background: #f0f0f0;
+    // color: #eee;
   }
 
   .invalidInput {
     border-color: red;
+  }
+  .error {
+    font-size: 13px;
+    color: red;
   }
 }
 
