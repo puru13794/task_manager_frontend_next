@@ -1,3 +1,33 @@
+@mixin status {
+  padding: 5px;
+  border-radius: 10px;
+}
+
 .tasksWrapper {
-    padding: 10px;
+  padding: 10px;
+  border: 1px solid #dfdfdf;
+  border-radius: 10px;
+  margin: 20px 50px;
+  .taskWrapper {
+    padding: 10px 30px;
+    margin: auto;
+    .headWrapper {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 600;
+      .todo {
+        background-color: red;
+        @include status;
+      }
+      .in_progress {
+        background-color: yellow;
+      }
+      .done {
+        background-color: green;
+      }
+    }
+    .taskdesc {
+      color: #616161;
+    }
+  }
 }

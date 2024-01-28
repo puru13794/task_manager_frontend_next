@@ -45,12 +45,12 @@ const loginform = ({ login = true }) => {
       };
       if (!login) {
         axios
-          .post(`http://localhost:3000/users`, {
+          .post(`${process.env.base_url}/users`, {
             user: { ...userData },
           })
           .then((response) => {
             // console.log("response", response);
-            if (response.status === 200 && response.data?.code == 200) {
+            if (response.status === 200 && response.data.data?.code == 200) {
               router.push("/login");
               //TODO:  flash a toater with response message
             } else {
@@ -59,14 +59,14 @@ const loginform = ({ login = true }) => {
           });
       } else {
         axios
-          .post(`http://localhost:3000/users/sign_in`, {
+          .post(`${process.env.base_url}/users/sign_in`, {
             user: { ...userData },
           })
           .then((response) => {
-            console.log("response", response);
+            // console.log("response", response);
             if (response.status === 200 && response.data?.data.code == 200) {
               // console.log('token', response.headers.authorization)
-              setAuthToken(response.headers.authorization, 'auth_token')
+              setAuthToken(response.headers.authorization, "auth_token");
               router.push("/dashboard");
             } else {
               console.log("sign in failed");
