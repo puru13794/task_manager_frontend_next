@@ -21,6 +21,8 @@
   }
 
   button {
+    display: flex;
+    justify-content: center;
     width: 100%;
     padding: 10px;
     background-color: #3498db;
@@ -29,6 +31,9 @@
     cursor: pointer;
     transition: 0.3s ease-in-out;
     border-radius: 5px;
+    .spin_loader {
+      margin-left: 20px;
+    }
 
     &:disabled {
       background-color: #bdc3c7;

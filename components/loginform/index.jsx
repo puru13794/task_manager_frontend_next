@@ -3,6 +3,8 @@ import styles from "./styles.module.scss";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { setAuthToken } from "../../utils/authUtils";
+import { toast } from "react-toastify";
+import Loader from "../../components/loader";
 
 const loginform = ({ login = true }) => {
   //   const { login } = props;
@@ -13,6 +15,7 @@ const loginform = ({ login = true }) => {
     isValidEmail: true,
     ispasswordValid: true,
   });
+  const [loader, setLoader] = useState(false);
   const emailInputRef = useRef(null);
 
   useEffect(() => {
@@ -39,6 +42,7 @@ const loginform = ({ login = true }) => {
       ispasswordValid: ispasswordValid,
     });
     if (data.ispasswordValid && data.isValidEmail) {
+      setLoader(true);
       const userData = {
         email: data.email,
         password: data.password,
@@ -53,9 +57,17 @@ const loginform = ({ login = true }) => {
             if (response.status === 200 && response.data.data?.code == 200) {
               router.push("/login");
               //TODO:  flash a toater with response message
+              toast.success("sign up sucess");
             } else {
+              toast.error("sign up failed");
               console.log("sign up failed");
             }
+          })
+          .catch((error) => {
+            toast.error(error.response.data);
+          })
+          .finally(() => {
+            setLoader(false);
           });
       } else {
         axios
@@ -68,9 +80,17 @@ const loginform = ({ login = true }) => {
               // console.log('token', response.headers.authorization)
               setAuthToken(response.headers.authorization, "auth_token");
               router.push("/dashboard");
+              // toast.success('login success')
             } else {
               console.log("sign in failed");
+              toast.error("sign in failed");
             }
+          })
+          .catch((error) => {
+            toast.error(error.response.data);
+          })
+          .finally(() => {
+            setLoader(false);
           });
       }
     } else {
@@ -111,7 +131,10 @@ const loginform = ({ login = true }) => {
             <p className={styles.error}>Provide a valid password</p>
           )}
         </div>
-        <button onClick={handleSubmit}>{login ? "Login" : "SignUp"}</button>
+        <button  onClick={handleSubmit}>
+          {login ? "Login" : "SignUp"}
+          {loader && <Loader />}
+        </button>
         {login && (
           <div className={styles.signupLink}>
             <p>

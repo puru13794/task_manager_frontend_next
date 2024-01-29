@@ -1,29 +1,68 @@
 @mixin status {
   padding: 5px;
   border-radius: 10px;
+  background-color: #ede9e9;
+  text-transform: uppercase;
+}
+
+.filterSection {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+  margin: 20px 50px;
+  .btn {
+    padding: 5px 10px;
+    border: 0;
+    color: #1f305d;
+    border-radius: 3px;
+    background-color: #f8c94b;
+    position: relative;
+    display: flex;
+    /* text-align: center; */
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
 }
 
 .tasksWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   padding: 10px;
-  border: 1px solid #dfdfdf;
-  border-radius: 10px;
   margin: 20px 50px;
+  .emptyTask {
+    margin: auto;
+  }
   .taskWrapper {
     padding: 10px 30px;
-    margin: auto;
+    // margin: auto;
+    border: 1px solid #dfdfdf;
+    border-radius: 10px;
     .headWrapper {
       display: flex;
       justify-content: space-between;
       font-weight: 600;
+      .actionsWrapper {
+        display: flex;
+        gap: 20px;
+        flex-direction: row;
+        align-items: center;
+        .handlers {
+          cursor: pointer;
+        }
+      }
       .todo {
-        background-color: red;
+        color: red;
         @include status;
       }
       .in_progress {
-        background-color: yellow;
+        color: blue;
+        @include status;
       }
       .done {
-        background-color: green;
+        color: green;
+        @include status;
       }
     }
     .taskdesc {

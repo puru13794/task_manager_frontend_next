@@ -1,0 +1,10 @@
+.buttonsWrapper {
+  display: flex;
+  justify-content: space-around;
+  button {
+    padding: 5px;
+    background-color: #f8c94b;
+    border-radius: 10px;
+    width: 150px;
+  }
+}
