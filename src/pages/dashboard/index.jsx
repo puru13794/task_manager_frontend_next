@@ -90,8 +90,8 @@ const dashboard = () => {
           }
         })
         .catch((error) => {
-            // console.log('error', error)
-          toast.error( error?.response?.data?.error );
+          // console.log('error', error)
+          toast.error(error?.response?.data?.error);
         })
         .finally(() => {
           setShowModal(false);
@@ -247,6 +247,11 @@ const dashboard = () => {
               </div>
               <button
                 type="button"
+                style={{
+                  "background-color": "#f8c94b",
+                  color: "#1f305d",
+                  border: "none",
+                }}
                 className="btn btn-primary"
                 onClick={handleAddTask}
               >

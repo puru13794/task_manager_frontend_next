@@ -1,4 +1,6 @@
 import "@/styles/globals.css";
+import "@/styles/dash_global.css";
+
 import { AuthProvider } from "../../context/AuthContext";
 // import { ToastContainer } from 'react-toastify';
 import { Toaster } from 'react-hot-toast';

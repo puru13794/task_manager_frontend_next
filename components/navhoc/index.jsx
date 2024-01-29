@@ -3,6 +3,7 @@ import { useAuth } from "../../context/AuthContext";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import Footer from "../footer";
 
 const navhoc = ({ children }) => {
   const auth = useAuth();
@@ -29,6 +30,7 @@ const navhoc = ({ children }) => {
         </ul>
       </nav>
       <div className={styles.content}>{children}</div>
+      <Footer />
     </>
   );
 };

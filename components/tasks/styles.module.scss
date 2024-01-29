@@ -1,6 +1,7 @@
 @mixin status {
   padding: 5px;
   border-radius: 10px;
+  font-size: 12px;
   background-color: #ede9e9;
   text-transform: uppercase;
 }
@@ -8,9 +9,19 @@
 .filterSection {
   display: flex;
   justify-content: flex-end;
-  padding: 10px;
+  padding: 10px 0;
   margin: 20px 50px;
   gap: 80px;
+  // border: 1px solid black;
+  select {
+    border-radius: 5px;
+    border: none;
+    border: 1px solid black;
+    padding: 0 5px;
+    &:focus {
+      border: 1px solid black;
+    }
+  }
   .btn {
     padding: 5px 10px;
     border: 0;
@@ -43,6 +54,7 @@
     .headWrapper {
       display: flex;
       justify-content: space-between;
+      // font-size: 12px;
       font-weight: 600;
       .actionsWrapper {
         display: flex;
@@ -54,15 +66,15 @@
         }
       }
       .todo {
-        color: red;
+        color: #840014;
         @include status;
       }
       .in_progress {
-        color: blue;
+        color: #c19e3c;
         @include status;
       }
       .done {
-        color: green;
+        color: #3CC151;
         @include status;
       }
     }
@@ -72,9 +84,11 @@
   }
 }
 
-
 @media (max-width: 991px) {
-    .tasksWrapper {
-        margin: 10px 20px;
-    }
+  .filterSection {
+    justify-content: space-between;
+  }
+  .tasksWrapper {
+    margin: 10px 20px;
+  }
 }
