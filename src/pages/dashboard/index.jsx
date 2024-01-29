@@ -148,6 +148,12 @@ const dashboard = () => {
       .finally(() => {
         setDeletemodal(false);
         fetchData();
+        setNewTask({
+            id: "",
+            title: "",
+            description: "",
+            status: "todo",
+          });
       });
   };
 
