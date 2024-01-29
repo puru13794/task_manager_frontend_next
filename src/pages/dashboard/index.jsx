@@ -15,6 +15,7 @@ const dashboard = () => {
   const [tasks, setTasks] = useState([]);
   const [edit, setEdit] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [filter, setFilter] = useState("all");
   const [deleteModal, setDeletemodal] = useState(false);
   const [newTask, setNewTask] = useState({
     id: "",
@@ -149,15 +150,15 @@ const dashboard = () => {
         setDeletemodal(false);
         fetchData();
         setNewTask({
-            id: "",
-            title: "",
-            description: "",
-            status: "todo",
-          });
+          id: "",
+          title: "",
+          description: "",
+          status: "todo",
+        });
       });
   };
 
-  const fetchData = async () => {
+  const fetchData = async (filter_by = "all") => {
     const authToken = getAuthToken("auth_token");
     //   console.log("authToken", authToken);
     if (authToken) {
@@ -165,7 +166,7 @@ const dashboard = () => {
       try {
         // const response = await
         axios
-          .get(`${process.env.base_url}/tasks`, {
+          .get(`${process.env.base_url}/tasks?filter=${filter_by}`, {
             headers: {
               Authorization: authToken,
             },
@@ -272,6 +273,9 @@ const dashboard = () => {
           setShowModal={setShowModal}
           handleDelete={handleDelete}
           handleEdit={handleEdit}
+          filter={filter}
+          setFilter={setFilter}
+          fetchData={fetchData}
         />
       </NavHoc>
     </>

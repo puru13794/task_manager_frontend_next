@@ -2,11 +2,35 @@ import styles from "./styles.module.scss";
 import Image from "next/image";
 
 const tasks = (props) => {
-  const { tasks, showModal, setShowModal, handleDelete, handleEdit } = props;
+  const {
+    tasks,
+    showModal,
+    setShowModal,
+    handleDelete,
+    handleEdit,
+    filter,
+    setFilter,
+    fetchData,
+  } = props;
+  const handleFilterChange = async (event) => {
+    const selectedFilter = event.target.value;
+    setFilter(selectedFilter);
+    await fetchData(selectedFilter);
+  };
   //   console.log("tasks", tasks);
   return (
     <>
       <div className={styles.filterSection}>
+        <select
+          className={styles.filterDropdown}
+          onChange={handleFilterChange}
+          value={filter}
+        >
+          <option value="all">All</option>
+          <option value="todo">To Do</option>
+          <option value="in_progress">In Progress</option>
+          <option value="done">Done</option>
+        </select>
         <button
           className={styles.btn}
           onClick={() => {
@@ -56,7 +80,7 @@ const tasks = (props) => {
             </div>
           );
         })}
-        {tasks.length == 0 &&  (<p className={styles.emptyTask}>No Tasks</p>)}
+        {tasks.length == 0 && <p className={styles.emptyTask}>No Tasks</p>}
       </div>
     </>
   );
