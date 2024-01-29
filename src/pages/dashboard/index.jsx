@@ -8,7 +8,7 @@ import Confirmation from "../../../components/confirmation";
 import { getAuthToken, removeAuthToken } from "../../../utils/authUtils";
 import NavHoc from "../../../components/navhoc";
 // import { ToastContainer, toast } from "react-toastify";
-import toast, { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from "react-hot-toast";
 // import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
@@ -90,7 +90,8 @@ const dashboard = () => {
           }
         })
         .catch((error) => {
-          toast.error(error.response.data);
+            // console.log('error', error)
+          toast.error( error?.response?.data?.error );
         })
         .finally(() => {
           setShowModal(false);
@@ -164,34 +165,27 @@ const dashboard = () => {
     //   console.log("authToken", authToken);
     if (authToken) {
       // console.log("customKey", process.env.customKey);
-      try {
-        // const response = await
-        axios
-          .get(`${process.env.base_url}/tasks?filter=${filter_by}`, {
-            headers: {
-              Authorization: authToken,
-            },
-          })
-          .then((response) => {
-            if (response.status == 200) {
-              console.log("data", response.data);
-              setTasks(response.data.data);
-            } else {
-              removeAuthToken("auth_token");
-              router.push("/login");
-            }
-          })
-          .catch((error) => {
-            toast.error(error?.response?.data);
+      // const response = await
+      axios
+        .get(`${process.env.base_url}/tasks?filter=${filter_by}`, {
+          headers: {
+            Authorization: authToken,
+          },
+        })
+        .then((response) => {
+          if (response.status == 200) {
+            console.log("data", response.data);
+            setTasks(response.data.data);
+          } else {
+            removeAuthToken("auth_token");
             router.push("/login");
-          });
-      } catch (error) {
-        if (error.status != 200) {
-          removeAuthToken("auth_token");
-          router.push("/login");
-        }
-        console.error("Error fetching tasks:", error);
-      }
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          // toast.error(error?.response?.data);
+          // router.push("/login");
+        });
     } else {
       router.push("/login");
     }
