@@ -7,8 +7,9 @@ import { useState, useEffect } from "react";
 import Confirmation from "../../../components/confirmation";
 import { getAuthToken, removeAuthToken } from "../../../utils/authUtils";
 import NavHoc from "../../../components/navhoc";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+// import { ToastContainer, toast } from "react-toastify";
+import toast, { Toaster } from 'react-hot-toast';
+// import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
 const dashboard = () => {
@@ -201,7 +202,7 @@ const dashboard = () => {
   }, [router]);
   return (
     <>
-      <ToastContainer />
+      <Toaster />
       <NavHoc>
         <Modal show={showModal} onHide={setShowModal}>
           <Modal.Header closeButton>

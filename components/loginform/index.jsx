@@ -3,7 +3,8 @@ import styles from "./styles.module.scss";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { setAuthToken } from "../../utils/authUtils";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
+import toast from 'react-hot-toast';
 import Loader from "../../components/loader";
 
 const loginform = ({ login = true }) => {
